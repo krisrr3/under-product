@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ev-model-1",
+    "name": "EV Model 1",
+    "type": "Electric Vehicle",
+    "basePrice": 35000,
+    "features": ["Long Range Battery", "Fast Charging", "Autopilot"]
+  },
+  {
+    "id": "ev-model-2", 
+    "name": "EV Model 2",
+    "type": "Electric Vehicle",
+    "basePrice": 45000,
+    "features": ["Premium Interior", "Enhanced Autopilot", "Super Fast Charging"]
+  },
+  {
+    "id": "ev-model-3",
+    "name": "EV Model 3", 
+    "type": "Electric Vehicle",
+    "basePrice": 55000,
+    "features": ["Luxury Package", "Full Self Driving", "Premium Sound System"]
+  }
+]
