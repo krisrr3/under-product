@@ -14,11 +14,11 @@ Using DDD to spell out the Ubiquitous Language,
 
 > At design time, the Pricing Strategy of an API will be chosen, and it will have the rules to calculate how the Total Cost of Ownership.
 
-> The first type of Pricing Strategy is called Most Profitable Pays, which essentially means the Product making the most profit pays for the API.
+> The first type of Pricing Strategy is called Most Profitable Pays (MPP), which essentially means the Product making the most profit pays for the API.
 
-> The 2nd type of Pricing Strategy is called Equal Share, which means that it is shared by the number of Products needing it equally.
+> The 2nd type of Pricing Strategy is called Equal Share(ES), which means that it is shared by the number of Products needing it equally.
 
-> The 3rd type of Pricing Strategy is called Pay by Rate, which means that the cost of the API is shared across Products based on the number of calls made to an API by particular Products.
+> The 3rd type of Pricing Strategy is called Pay by Rate (PbR), which means that the cost of the API is shared across Products based on the number of calls made to an API by particular Products.
 
 ## API Headers for traceability
 
@@ -30,7 +30,8 @@ This can be rolled out through a script to GitHub repos where applications and A
 {
     "OriginatingProduct": "Employee Retention",
     "Channel": "Web",
-    "CallingLayer": "Salary API"
+    "CallingLayer": "Salary API",
+    "CalledLayer": "Payments API"
 }
 ```
 

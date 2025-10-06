@@ -1,0 +1,28 @@
+[
+
+        {
+            "id": "getUser",
+            "tco": 12050.00,
+            "costPerUnitCall": 1.25
+        },
+        {
+            "id": "orders-api",
+            "tco": 34075.00,
+            "costPerUnitCall": 2.10
+        },
+        {
+            "id": "payments-api",
+            "tco": 21030.00,
+            "costPerUnitCall": 1.50
+        },
+        {
+            "id": "deleteOrder",
+            "tco": 9500.00,
+            "costPerUnitCall": 1.05
+        },
+        {
+            "id": "listOrders",
+            "tco": 18020.00,
+            "costPerUnitCall": 0.006
+        }
+]

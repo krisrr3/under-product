@@ -1,0 +1,233 @@
+/* Additional styles for enhanced dashboard */
+
+.api-section {
+    margin-bottom: 40px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.api-header {
+    background: #e9ecef;
+    padding: 15px 20px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.api-name {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #495057;
+}
+
+.api-stats {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+/* Loading animations */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced table styles */
+.table-responsive {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
+
+/* Chart animations */
+.chart-container {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.bar-fill {
+    animation: growBar 1s ease-out forwards;
+}
+
+@keyframes growBar {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--bar-width);
+    }
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip.show {
+    opacity: 1;
+}
+
+/* Export button styles */
+.export-options {
+    position: relative;
+    display: inline-block;
+}
+
+.export-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.export-dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.export-dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Filter styles */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #6c757d;
+}
+
+/* Responsive enhancements */
+@media (max-width: 576px) {
+    .summary-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .api-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .api-stats {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .tabs {
+        flex-wrap: wrap;
+    }
+    
+    .tab {
+        flex: 1;
+        text-align: center;
+        min-width: 80px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #e9ecef;
+    }
+    
+    .container {
+        background: #2d3748;
+        color: #e9ecef;
+    }
+    
+    .header {
+        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    }
+    
+    .controls {
+        background: #374151;
+        border-bottom-color: #4a5568;
+    }
+    
+    table {
+        background: #2d3748;
+    }
+    
+    th {
+        background: #374151;
+        color: #e9ecef;
+    }
+    
+    tr:hover {
+        background: #374151;
+    }
+}
+
+/* Print styles */
+@media print {
+    .controls, .filters, .tabs {
+        display: none;
+    }
+    
+    .container {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .header {
+        background: #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .summary-cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .table-container {
+        overflow: visible;
+    }
+    
+    .chart-container {
+        break-inside: avoid;
+    }
+}

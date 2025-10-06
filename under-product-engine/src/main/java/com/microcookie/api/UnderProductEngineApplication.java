@@ -1,9 +1,11 @@
-package com.microcookie.api.under_product_engine;
+package com.microcookie.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan("com.microcookie.api")
 public class UnderProductEngineApplication {
 
 	public static void main(String[] args) {

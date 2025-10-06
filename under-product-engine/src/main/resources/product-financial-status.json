@@ -1,0 +1,17 @@
+[
+    {
+        "productId": "EV1",
+        "cost": 1200000,
+        "profit": 350000
+    },
+    {
+        "productId": "EV2",
+        "cost": 1800000,
+        "profit": 500000
+    },
+    {
+        "productId": "EV3",
+        "cost": 2500000,
+        "profit": 800000
+    }
+]

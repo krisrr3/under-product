@@ -1,4 +1,4 @@
-package com.microcookie.api.under_product_engine;
+package com.microcookie.api;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

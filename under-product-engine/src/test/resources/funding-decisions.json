@@ -1,0 +1,44 @@
+[
+    {
+        "apiId": "payments-api",
+        "decision": "approved",
+        "fundingStrategyType": "MPP",
+        "amount": 50000,
+        "decisionDate": "2024-05-10"
+    },
+    {
+        "apiId": "inventory-api",
+        "decision": "rejected",
+        "fundingStrategyType": "PbR",
+        "amount": 0,
+        "decisionDate": "2024-05-12"
+    },
+    {
+        "apiId": "auth-api",
+        "decision": "approved",
+        "fundingStrategyType": "MPP",
+        "amount": 120000,
+        "decisionDate": "2024-05-15"
+    },
+    {
+        "apiId": "orders-api",
+        "decision": "approved",
+        "fundingStrategyType": "ES",
+        "amount": 30000,
+        "decisionDate": "2024-05-18"
+    },
+    {
+        "apiId": "shipping-api",
+        "decision": "pending",
+        "fundingStrategyType": "MPP",
+        "amount": 0,
+        "decisionDate": "2024-05-20"
+    },
+    {
+        "apiId": "pricing-api",
+        "decision": "approved",
+        "fundingStrategyType": "ES",
+        "amount": 40000,
+        "decisionDate": "2024-05-22"
+    }
+]
