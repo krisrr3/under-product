@@ -1,13 +1,19 @@
 package com.microcookie.api.service;
 
 import org.springframework.stereotype.Service;
+
+import com.microcookie.api.domain.ApiCost;
+
 import java.util.*;
 import java.util.concurrent.*;
 import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Service
 public class ApiTrafficSimulatorService {
+
+    private final DataLoader dataLoader = new DataLoader();
 
     // Store active simulations
     private final Map<String, ScheduledFuture<?>> activeSimulations = new ConcurrentHashMap<>();
@@ -19,8 +25,22 @@ public class ApiTrafficSimulatorService {
     private final AtomicLong totalCalls = new AtomicLong(0);
 
     // Available options for simulation
-    private final List<String> availableApis = Arrays.asList("Pricing API", "Customer API", "Payments API", "Delivery API");
+    private final List<String> availableApis;
     private final List<String> availableProducts = Arrays.asList("EV1", "EV2", "EV3");
+
+
+
+    public ApiTrafficSimulatorService() {
+        List<ApiCost> apiCosts;
+        try {
+            apiCosts = dataLoader.loadApiTcoData();
+        } catch (java.io.IOException e) {
+            throw new RuntimeException("Failed to load API TCO data", e);
+        }
+        this.availableApis = apiCosts.stream()
+            .map(ApiCost::getId)
+            .collect(Collectors.toList());
+    }
 
     /**
      * Simulate a single API call

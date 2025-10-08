@@ -1,12 +1,12 @@
 [
 
         {
-            "id": "getUser",
+            "id": "orders-api",
             "tco": 12050.00,
             "costPerUnitCall": 1.25
         },
         {
-            "id": "orders-api",
+            "id": "auth-api",
             "tco": 34075.00,
             "costPerUnitCall": 2.10
         },
@@ -16,12 +16,17 @@
             "costPerUnitCall": 1.50
         },
         {
-            "id": "deleteOrder",
+            "id": "pricing-api",
             "tco": 9500.00,
             "costPerUnitCall": 1.05
         },
         {
-            "id": "listOrders",
+            "id": "inventory-api",
+            "tco": 9500.00,
+            "costPerUnitCall": 1.05
+        },
+        {
+            "id": "shipping-api",
             "tco": 18020.00,
             "costPerUnitCall": 0.006
         }

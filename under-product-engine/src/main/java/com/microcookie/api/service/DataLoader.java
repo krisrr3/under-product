@@ -56,4 +56,24 @@ public class DataLoader {
         }
     }
     
+
+    /**
+     * TODO This should ideally be a cached call as the data is not changed frequently
+     * 
+     * @return
+     * @throws IOException
+     */
+    public List<String> getApiNames() throws IOException {
+        try (InputStream is = getClass().getResourceAsStream("/api-tco-data.json")) {
+            if (is == null) {
+                throw new IOException("Resource not found: /api-tco-data.json");
+            }
+            List<String> apinames = objectMapper.readValue(is, new TypeReference<List<String>>() {});
+            return apinames.stream()
+                    .distinct()
+                    .toList();
+        }
+
+        
+    }
 }

@@ -9,10 +9,8 @@ import com.microcookie.api.domain.report.ApiToProductCostEntry;
 
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 /**
  * Orchestrator class that generates API cost breakdown per Product

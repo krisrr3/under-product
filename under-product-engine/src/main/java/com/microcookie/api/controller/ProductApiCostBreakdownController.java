@@ -1,8 +1,6 @@
 package com.microcookie.api.controller;
 
-import com.microcookie.api.domain.ApiCall;
-import com.microcookie.api.domain.ProductFinancialStatus;
-import com.microcookie.api.domain.funding.FundingStrategy;
+
 import com.microcookie.api.service.ApiToProductRelationshipAnalyserService;
 import com.microcookie.api.domain.report.ApiToProductCostEntry;
 
