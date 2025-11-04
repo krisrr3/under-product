@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: minimal
+  
+  # Completely disable data sources for minimal deployment
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.neo4j.Neo4jDataAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.neo4j.Neo4jRepositoriesAutoConfiguration
+      - org.springframework.kafka.annotation.KafkaListenerConfigurationSelector
+
+server:
+  port: 5000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    com.microcookie: DEBUG

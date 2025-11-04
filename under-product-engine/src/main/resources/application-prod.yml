@@ -1,0 +1,32 @@
+# Production Configuration
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,application/json
+  
+spring:
+  profiles:
+    active: prod
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  
+# Health check endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# Logging
+logging:
+  level:
+    com.microcookie: INFO
+    root: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

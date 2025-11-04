@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Longevity Stories - Under Product</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .story-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid;
+            position: relative;
+        }
+
+        .story-card.must-have {
+            border-left-color: #dc3545;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffeaea 100%);
+        }
+
+        .story-card.must-should {
+            border-left-color: #ffc107;
+            background: linear-gradient(135deg, #fffef5 0%, #fefce8 100%);
+        }
+
+        .story-card.complete {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .story-icon {
+            font-size: 3em;
+            margin-right: 20px;
+        }
+
+        .story-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .story-subtitle {
+            font-size: 1em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #dee2e6;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid;
+        }
+
+        .must-have .timeline-item::before {
+            border-color: #dc3545;
+        }
+
+        .must-should .timeline-item::before {
+            border-color: #ffc107;
+        }
+
+        .complete .timeline-item::before {
+            border-color: #28a745;
+        }
+
+        .timeline-date {
+            font-size: 0.9em;
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            color: #495057;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .impact-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .impact-critical {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .impact-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .impact-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .longevity-score {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .score-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .score-label {
+            font-size: 0.8em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .story-card {
+                padding: 20px;
+            }
+            
+            .longevity-score {
+                position: static;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button id="backBtn" class="back-button" type="button">← Back</button>
+            <h1>🔄 API Longevity Stories</h1>
+            <p>Real-world examples of how API longevity is affected by investment decisions</p>
+        </div>
+
+        <div class="content">
+            <div class="story-grid">
+                <!-- Story 1: Must Have Only -->
+                <div class="story-card must-have">
+                    <div class="longevity-score">
+                        <div class="score-number">3.2</div>
+                        <div class="score-label">Longevity Score</div>
+                    </div>
+                    
+                    <div class="story-header">
+                        <div class="story-icon">⚠️</div>
+                        <div>
+                            <div class="story-title">PaymentFlow API</div>
+                            <div class="story-subtitle">Must Have Only • Payment Processing</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 1-3</div>
+                            <div class="timeline-title">Initial Launch</div>
+                            <div class="timeline-description">
+                                API launched with basic ops tools, dev environment, and minimal governance. Initial adoption was smooth with early partners.
+                            </div>
+                            <span class="impact-badge impact-success">Successful Launch</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 4-6</div>
+                            <div class="timeline-title">Customer Onboarding Issues</div>
+                            <div class="timeline-description">
+                                Without API catalog or proper documentation, new customers struggled with integration. Support tickets increased 300%. No customer success team to help.
+                            </div>
+                            <span class="impact-badge impact-warning">Customer Friction</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 7-9</div>
+                            <div class="timeline-title">Scaling Problems</div>
+                            <div class="timeline-description">
+                                Traffic spikes caused outages. No proper gateway or load balancing. Manual scaling led to 2-hour downtimes during peak usage.
+                            </div>
+                            <span class="impact-badge impact-critical">Service Degradation</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 10-12</div>
+                            <div class="timeline-title">Customer Churn</div>
+                            <div class="timeline-description">
+                                Major enterprise client (40% of revenue) switched to competitor due to reliability issues. Three other clients threatened to leave due to poor developer experience.
+                            </div>
+                            <span class="impact-badge impact-critical">Revenue Loss</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story 2: Must Have + Should Have -->
+                <div class="story-card must-should">
+                    <div class="longevity-score">
+                        <div class="score-number">6.8</div>
+                        <div class="score-label">Longevity Score</div>
+                    </div>
+                    
+                    <div class="story-header">
+                        <div class="story-icon">📊</div>
+                        <div>
+                            <div class="story-title">DataSync API</div>
+                            <div class="story-subtitle">Must Have + Should Have • Data Integration</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 1-4</div>
+                            <div class="timeline-title">Strong Foundation</div>
+                            <div class="timeline-description">
+                                Launched with ops tools, IDP, dev tools, governance, plus API catalog and gateway. Customer onboarding was smooth with proper documentation.
+                            </div>
+                            <span class="impact-badge impact-success">Solid Start</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 5-8</div>
+                            <div class="timeline-title">Steady Growth</div>
+                            <div class="timeline-description">
+                                Customer success team helped onboard 15 new clients. Gateway handled traffic spikes well. Advanced governance policies prevented breaking changes.
+                            </div>
+                            <span class="impact-badge impact-success">Healthy Growth</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 9-11</div>
+                            <div class="timeline-title">Funding Challenge</div>
+                            <div class="timeline-description">
+                                During budget review, CFO questioned ROI without automated pricing reports. Struggled to justify continued investment in customer success team and advanced features.
+                            </div>
+                            <span class="impact-badge impact-warning">Budget Pressure</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 12-15</div>
+                            <div class="timeline-title">Investment Reduction</div>
+                            <div class="timeline-description">
+                                Lost 30% of budget for "nice-to-haves." Customer success team reduced by half. No investment in showcase features that competitors started offering.
+                            </div>
+                            <span class="impact-badge impact-warning">Competitive Disadvantage</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story 3: Complete Framework -->
+                <div class="story-card complete">
+                    <div class="longevity-score">
+                        <div class="score-number">9.1</div>
+                        <div class="score-label">Longevity Score</div>
+                    </div>
+                    
+                    <div class="story-header">
+                        <div class="story-icon">🚀</div>
+                        <div>
+                            <div class="story-title">CloudConnect API</div>
+                            <div class="story-subtitle">Complete Framework • Infrastructure Management</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 1-3</div>
+                            <div class="timeline-title">Comprehensive Launch</div>
+                            <div class="timeline-description">
+                                Full API longevity framework implemented from day one. Automated pricing reports provided clear ROI metrics. Customer showcase highlighted early wins.
+                            </div>
+                            <span class="impact-badge impact-success">Strategic Launch</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 4-8</div>
+                            <div class="timeline-title">Accelerated Adoption</div>
+                            <div class="timeline-description">
+                                Developer incentives program attracted 50+ contributors. API storytelling created compelling case studies. Customer showcase drove viral adoption in developer community.
+                            </div>
+                            <span class="impact-badge impact-success">Market Leadership</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 9-12</div>
+                            <div class="timeline-title">Funding Success</div>
+                            <div class="timeline-description">
+                                Automated reports showed 300% ROI. Secured additional $2M funding for expansion. Governance 301 features attracted enterprise clients with compliance needs.
+                            </div>
+                            <span class="impact-badge impact-success">Investment Growth</span>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Month 13-18</div>
+                            <div class="timeline-title">Market Dominance</div>
+                            <div class="timeline-description">
+                                Became industry standard for infrastructure APIs. Ecosystem of 200+ integrations. Acquired two smaller competitors. Revenue grew 500% year-over-year.
+                            </div>
+                            <span class="impact-badge impact-success">Industry Leader</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script>
+        // Robust back navigation: try history.back(), otherwise fall back to index.html
+        (function() {
+            var btn = document.getElementById('backBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function (e) {
+                // If there's a referrer from the same origin, prefer that
+                try {
+                    var ref = document.referrer;
+                    var hasHistory = window.history.length > 1;
+                    var sameOriginRef = ref && (new URL(ref)).origin === window.location.origin;
+
+                    if (hasHistory) {
+                        // Use history.back() when possible
+                        window.history.back();
+                        // As a safety, after a short timeout navigate to index if nothing happens
+                        setTimeout(function() {
+                            // If still on the same page, go to index
+                            if (window.location.pathname.endsWith('api-stories.html')) {
+                                window.location.href = 'index.html';
+                            }
+                        }, 600);
+                    } else if (sameOriginRef) {
+                        // If no history stack but referrer points to same origin, go there
+                        window.location.href = ref;
+                    } else {
+                        // Fallback to site index
+                        window.location.href = 'index.html';
+                    }
+                } catch (err) {
+                    // On any error, fallback to index
+                    window.location.href = 'index.html';
+                }
+            });
+        })();
+    </script>
+</html>

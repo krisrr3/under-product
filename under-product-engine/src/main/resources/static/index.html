@@ -68,6 +68,36 @@
             text-align: center;
         }
 
+        .longevity-button-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .longevity-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            min-width: 300px;
+        }
+
+        .longevity-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
+
+        .longevity-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -75,13 +105,25 @@
             margin-bottom: 50px;
         }
 
+        .longevity-layer .features-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 0;
+        }
+
         .feature-card {
             background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 10px;
+            border-radius: 8px;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #e9ecef;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card:hover {
+            z-index: 1001;
         }
 
         .feature-card:hover {
@@ -90,22 +132,205 @@
         }
 
         .feature-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 1.4em;
+            margin-bottom: 5px;
             display: block;
         }
 
         .feature-title {
-            font-size: 1.3em;
+            font-size: 0.95em;
             font-weight: bold;
             color: #2c3e50;
-            margin-bottom: 15px;
+            margin-bottom: 0;
         }
 
         .feature-description {
+            display: none;
+            position: absolute;
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            line-height: 1.4;
+            width: 200px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+
+        .feature-card {
+            position: relative;
+        }
+
+        .feature-card:hover .feature-description {
+            display: block;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 5px;
+        }
+
+        .feature-description::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #2c3e50;
+        }
+
+        .longevity-section {
+            margin-bottom: 50px;
+        }
+
+        .longevity-layers {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 768px) {
+            .longevity-layers {
+                flex-direction: column;
+            }
+        }
+
+        .longevity-layer {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            border-left: 3px solid;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .longevity-layer:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .longevity-layer.must-have {
+            border-left-color: #dc3545;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffeaea 100%);
+        }
+
+        .longevity-layer.should-have {
+            border-left-color: #ffc107;
+            background: linear-gradient(135deg, #fffef5 0%, #fefce8 100%);
+        }
+
+        .longevity-layer.could-have {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+        }
+
+        .layer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .layer-priority {
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-right: 15px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        .must-have .layer-priority {
+            background: #dc3545;
+            color: white;
+        }
+
+        .should-have .layer-priority {
+            background: #ffc107;
+            color: #856404;
+        }
+
+        .could-have .layer-priority {
+            background: #28a745;
+            color: white;
+        }
+
+        .layer-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .layer-subtitle {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .layer-description {
             color: #6c757d;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 1.05em;
+        }
+
+        .layer-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .layer-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .layer-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .must-have .layer-item:hover {
+            border-color: #dc3545;
+        }
+
+        .should-have .layer-item:hover {
+            border-color: #ffc107;
+        }
+
+        .could-have .layer-item:hover {
+            border-color: #28a745;
+        }
+
+        .item-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .item-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .item-description {
+            color: #6c757d;
+            line-height: 1.5;
+            font-size: 0.95em;
         }
 
         .navigation-section {
@@ -235,38 +460,157 @@
         </div>
 
         <div class="main-content">
-            <h2 class="section-title">Key Features</h2>
+            <h2 class="section-title">API Longevity Framework</h2>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">�</span>
-                    <div class="feature-title">API-Product Relationship Mapping</div>
-                    <div class="feature-description">
-                        Automatically tracks and visualizes relationships between your APIs and products using intelligent header analysis.
+            <div class="longevity-button-container">
+                <button class="longevity-button" onclick="window.open('/api-stories.html', '_blank')">API Longevity Stories</button>
+            </div>
+            
+            <div class="longevity-layers">
+                <div class="longevity-layer must-have">
+                    <h3 class="layer-title">Must Have</h3>
+                    <p class="layer-subtitle">Essential foundation for API sustainability</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <span class="feature-icon">🔧</span>
+                            <div class="feature-title">Ops Tools</div>
+                            <div class="feature-description">
+                                Monitoring, logging, and alerting systems essential for API health and performance tracking.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">🏗️</span>
+                            <div class="feature-title">IDP (Internal Developer Platform)</div>
+                            <div class="feature-description">
+                                Standardized development environment and deployment pipelines for consistent API delivery.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">⚡</span>
+                            <div class="feature-title">Dev Tools</div>
+                            <div class="feature-description">
+                                Testing frameworks, debugging tools, and development acceleration utilities.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">�</span>
+                            <div class="feature-title">Governance 101</div>
+                            <div class="feature-description">
+                                Basic API standards, versioning policies, and compliance requirements.
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-icon">💰</span>
+                            <div class="feature-title">Keep Alive Funding</div>
+                            <div class="feature-description">
+                                Enough Funding to maintain and support the API.
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="feature-card">
-                    <span class="feature-icon">💰</span>
-                    <div class="feature-title">Multiple Funding Strategies</div>
-                    <div class="feature-description">
-                        Supports Equal Share, Pay by Rate, and Most Profitable Pays strategies for flexible cost allocation.
+                <div class="longevity-layer should-have">
+                    <h3 class="layer-title">Should Have</h3>
+                    <p class="layer-subtitle">Enhances API ecosystem value</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <span class="feature-icon">�</span>
+                            <div class="feature-title">API Catalog</div>
+                            <div class="feature-description">
+                                Centralized repository of API documentation and discovery services.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">⚖️</span>
+                            <div class="feature-title">ALB</div>
+                            <div class="feature-description">
+                                Application Load Balancer for traffic distribution and routing.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">🚪</span>
+                            <div class="feature-title">Gateway</div>
+                            <div class="feature-description">
+                                API Gateway for request routing, authentication, and rate limiting.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">�</span>
+                            <div class="feature-title">Governance 201</div>
+                            <div class="feature-description">
+                                Advanced API governance, security policies, and lifecycle management.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">👥</span>
+                            <div class="feature-title">Customer Success Team</div>
+                            <div class="feature-description">
+                                Dedicated support team for API adoption and developer experience.
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-icon">💰</span>
+                            <div class="feature-title">Persistent Funding</div>
+                            <div class="feature-description">
+                                Funding pot allocated to evolve and support the API.
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="feature-card">
-                    <span class="feature-icon">📊</span>
-                    <div class="feature-title">Real-time Analytics</div>
-                    <div class="feature-description">
-                        Interactive dashboards providing insights into API usage patterns and cost distribution across products.
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <span class="feature-icon">🔄</span>
-                    <div class="feature-title">Traffic Simulation & Visualization</div>
-                    <div class="feature-description">
-                        Real-time API call simulation with D3.js network graphs showing how API-product relationships are formed dynamically.
+                <div class="longevity-layer could-have">
+                    <h3 class="layer-title">Could Have</h3>
+                    <p class="layer-subtitle">Advanced capabilities for optimization</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <span class="feature-icon">🏆</span>
+                            <div class="feature-title">Customer Showcase</div>
+                            <div class="feature-description">
+                                Platform to highlight successful API implementations and use cases.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">🎁</span>
+                            <div class="feature-title">Dev Incentives</div>
+                            <div class="feature-description">
+                                Reward systems and recognition programs for developer contributions.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">🎓</span>
+                            <div class="feature-title">Governance 301</div>
+                            <div class="feature-description">
+                                Expert-level API governance with compliance automation and analytics.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">📈</span>
+                            <div class="feature-title">Automated Pricing Reports</div>
+                            <div class="feature-description">
+                                AI-driven cost analysis and pricing optimization recommendations.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <span class="feature-icon">📖</span>
+                            <div class="feature-title">API Storytelling</div>
+                            <div class="feature-description">
+                                Narrative documentation and case studies showcasing API journey and evolution.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -304,6 +648,14 @@
                         <div class="nav-card-title">Funding Recommendations</div>
                         <div class="nav-card-description">
                             Smart funding strategy recommendations with product usage pie charts and intelligent analysis
+                        </div>
+                    </a>
+
+                    <a href="/header-rollout.html" class="nav-card">
+                        <div class="nav-card-icon">⚙️</div>
+                        <div class="nav-card-title">API Header Rollout</div>
+                        <div class="nav-card-description">
+                            Marketplace for API header implementations across SOAP, REST, SaaS, GraphQL, and other protocols
                         </div>
                     </a>
                     

@@ -4,9 +4,7 @@ Under Product is a capability that solves the transparency issue that exists bet
 
 The outcome is for API longevity to be improved.
 
-# How it works
-
-## Domain
+# Domain
 
 Using DDD to spell out the Ubiquitous Language,
 
@@ -19,6 +17,8 @@ Using DDD to spell out the Ubiquitous Language,
 > The 2nd type of Pricing Strategy is called Equal Share(ES), which means that it is shared by the number of Products needing it equally.
 
 > The 3rd type of Pricing Strategy is called Pay by Rate (PbR), which means that the cost of the API is shared across Products based on the number of calls made to an API by particular Products.
+
+# How it works
 
 ## API Headers for traceability
 
@@ -35,11 +35,20 @@ This can be rolled out through a script to GitHub repos where applications and A
 }
 ```
 
-## How Under-Product works
+## Data Sources
 
 Under-Product reads the API header logs and uses the Api Metadata, which could be stored in an API Catalogue or an architecture repository, to contruct a summary of 
 - API usage by Product
 - API cost allocation per API
+
+
+# Build and deploy
+
+The following commands can be used to build and deploy
+
+        cd ./under-product-engine
+        mvn package
+        eb deploy
 
 
 

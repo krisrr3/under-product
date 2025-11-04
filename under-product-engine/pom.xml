@@ -11,7 +11,7 @@
 	<groupId>com.microcookie.api</groupId>
 	<artifactId>under-product-engine</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>under-product-engine</name>
 	<description>Under Product Engine will be used to process api headers to create the relationships between Products and other APIs</description>
 	<url/>
@@ -47,7 +47,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -66,6 +65,40 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+			<!-- Copy WAR file to root directory for easy deployment -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>copy-deployment-files</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<!-- Copy JAR file to root -->
+								<copy file="${project.build.directory}/${project.build.finalName}.jar" 
+								      tofile="${project.basedir}/${project.build.finalName}.jar" 
+								      overwrite="true"/>
+								
+								<!-- Create deployment zip for Elastic Beanstalk -->
+								<zip destfile="${project.build.directory}/eb-deployment.zip">
+									<fileset file="${project.basedir}/${project.build.finalName}.jar"/>
+									<fileset file="${project.basedir}/Procfile"/>
+									<fileset dir="${project.basedir}/.ebextensions" includes="**/*" erroronmissingdir="false"/>
+								</zip>
+								
+								<echo message="Deployment package created: ${project.build.directory}/eb-deployment.zip"/>
+								<echo message="JAR file copied to: ${project.basedir}/${project.build.finalName}.jar"/>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

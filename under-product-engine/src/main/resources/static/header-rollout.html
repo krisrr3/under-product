@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Header Rollout Marketplace - Under Product</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .marketplace-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            background: rgba(255,255,255,0.3);
+            text-decoration: none;
+            color: white;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .intro-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+
+        .intro-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .intro-description {
+            color: #6c757d;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filter-section {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+
+        .filter-title {
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .marketplace-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .api-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .api-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .api-card.implemented {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+        }
+
+        .api-card.not-available {
+            border-color: #dc3545;
+            background: linear-gradient(135deg, #fff8f8 0%, #ffeaea 100%);
+            opacity: 0.7;
+        }
+
+        .api-card.in-development {
+            border-color: #ffc107;
+            background: linear-gradient(135deg, #fffef8 0%, #fefce8 100%);
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-badge.implemented {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.not-available {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-badge.in-development {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .api-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .api-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .api-type {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .api-description {
+            color: #6c757d;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .implementation-info {
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+
+        .contributor {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .contributor-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .contributor-name {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .contributor-role {
+            color: #6c757d;
+            font-size: 0.85em;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .features-list li {
+            padding: 3px 0;
+            color: #495057;
+            font-size: 0.9em;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-disabled {
+            background: #e9ecef;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .marketplace-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .home-btn {
+                position: static;
+                margin-top: 20px;
+                display: inline-block;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="home-btn">🏠 Home</a>
+            <h1>🔧 API Header Rollout</h1>
+            <p>Marketplace for API header implementations across different protocols and technologies</p>
+            <div class="marketplace-badge">🏪 Community Marketplace</div>
+        </div>
+
+        <div class="main-content">
+            <div class="intro-section">
+                <div class="intro-title">🌐 Welcome to the API Header Implementation Marketplace</div>
+                <div class="intro-description">
+                    Discover and deploy standardized API headers for tracking product relationships across SOAP, REST, SaaS, GraphQL, and other API types. 
+                    Community-driven implementations ensure compatibility and best practices while enabling seamless cost attribution and usage analytics.
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">🔍 Filter by API Type</div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterApis('all')">All APIs</button>
+                    <button class="filter-btn" onclick="filterApis('implemented')">Implemented</button>
+                    <button class="filter-btn" onclick="filterApis('in-development')">In Development</button>
+                    <button class="filter-btn" onclick="filterApis('not-available')">Not Available</button>
+                </div>
+            </div>
+
+            <div class="marketplace-grid" id="marketplace-grid">
+                <!-- REST API Card -->
+                <div class="api-card implemented" data-status="implemented">
+                    <div class="status-badge implemented">✅ Implemented</div>
+                    <span class="api-icon">🔄</span>
+                    <div class="api-title">REST API Headers</div>
+                    <div class="api-type">RESTful Services</div>
+                    <div class="api-description">
+                        Standard HTTP headers for tracking product relationships in REST APIs. Includes request/response correlation and cost attribution headers.
+                    </div>
+                    <div class="implementation-info">
+                        <div class="contributor">
+                            <div class="contributor-avatar">AM</div>
+                            <div>
+                                <div class="contributor-name">Alex Morgan</div>
+                                <div class="contributor-role">API Architect</div>
+                            </div>
+                        </div>
+                        <ul class="features-list">
+                            <li>X-Product-ID header tracking</li>
+                            <li>X-Cost-Center attribution</li>
+                            <li>X-Request-Correlation support</li>
+                            <li>Automatic usage metrics</li>
+                        </ul>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-primary">Deploy Headers</a>
+                            <a href="#" class="btn btn-secondary">View Docs</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GraphQL Card -->
+                <div class="api-card implemented" data-status="implemented">
+                    <div class="status-badge implemented">✅ Implemented</div>
+                    <span class="api-icon">🔗</span>
+                    <div class="api-title">GraphQL Extensions</div>
+                    <div class="api-type">GraphQL APIs</div>
+                    <div class="api-description">
+                        GraphQL extensions and directives for tracking product usage at the query and field level with detailed cost breakdown.
+                    </div>
+                    <div class="implementation-info">
+                        <div class="contributor">
+                            <div class="contributor-avatar">SJ</div>
+                            <div>
+                                <div class="contributor-name">Sarah Johnson</div>
+                                <div class="contributor-role">GraphQL Expert</div>
+                            </div>
+                        </div>
+                        <ul class="features-list">
+                            <li>@productTracking directive</li>
+                            <li>Query complexity cost calculation</li>
+                            <li>Field-level usage metrics</li>
+                            <li>Subscription cost tracking</li>
+                        </ul>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-primary">Deploy Extensions</a>
+                            <a href="#" class="btn btn-secondary">View Schema</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SOAP API Card -->
+                <div class="api-card in-development" data-status="in-development">
+                    <div class="status-badge in-development">🚧 In Development</div>
+                    <span class="api-icon">🧼</span>
+                    <div class="api-title">SOAP Headers</div>
+                    <div class="api-type">SOAP Web Services</div>
+                    <div class="api-description">
+                        Custom SOAP headers for legacy system integration with product tracking capabilities and WS-* standard compliance.
+                    </div>
+                    <div class="implementation-info">
+                        <div class="contributor">
+                            <div class="contributor-avatar">MK</div>
+                            <div>
+                                <div class="contributor-name">Mike Kumar</div>
+                                <div class="contributor-role">Enterprise Integration</div>
+                            </div>
+                        </div>
+                        <ul class="features-list">
+                            <li>WS-Addressing headers</li>
+                            <li>Custom product tracking elements</li>
+                            <li>Legacy system compatibility</li>
+                            <li>WSDL integration support</li>
+                        </ul>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-secondary">View Progress</a>
+                            <a href="#" class="btn btn-secondary">Join Development</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SaaS Integration Card -->
+                <div class="api-card implemented" data-status="implemented">
+                    <div class="status-badge implemented">✅ Implemented</div>
+                    <span class="api-icon">☁️</span>
+                    <div class="api-title">SaaS Integration Headers</div>
+                    <div class="api-type">SaaS Platform APIs</div>
+                    <div class="api-description">
+                        Standardized headers for SaaS platform integrations with multi-tenant support and subscription-based cost tracking.
+                    </div>
+                    <div class="implementation-info">
+                        <div class="contributor">
+                            <div class="contributor-avatar">LC</div>
+                            <div>
+                                <div class="contributor-name">Lisa Chen</div>
+                                <div class="contributor-role">SaaS Architect</div>
+                            </div>
+                        </div>
+                        <ul class="features-list">
+                            <li>Multi-tenant tracking</li>
+                            <li>Subscription tier mapping</li>
+                            <li>Usage quota monitoring</li>
+                            <li>Billing integration ready</li>
+                        </ul>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-primary">Deploy Integration</a>
+                            <a href="#" class="btn btn-secondary">View API Keys</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WebSocket Card -->
+                <div class="api-card not-available" data-status="not-available">
+                    <div class="status-badge not-available">❌ Not Available</div>
+                    <span class="api-icon">🔌</span>
+                    <div class="api-title">WebSocket Headers</div>
+                    <div class="api-type">Real-time APIs</div>
+                    <div class="api-description">
+                        Real-time cost tracking for WebSocket connections with session-based attribution and message-level metrics.
+                    </div>
+                    <div class="implementation-info">
+                        <div class="contributor">
+                            <div class="contributor-avatar">?</div>
+                            <div>
+                                <div class="contributor-name">Looking for Contributors</div>
+                                <div class="contributor-role">Real-time Systems Expert Needed</div>
+                            </div>
+                        </div>
+                        <ul class="features-list">
+                            <li>Connection-level tracking</li>
+                            <li>Message cost attribution</li>
+                            <li>Session persistence</li>
+                            <li>Real-time usage analytics</li>
+                        </ul>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-disabled">Not Available</a>
+                            <a href="#" class="btn btn-secondary">Request Implementation</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- gRPC Card -->
+                <div class="api-card in-development" data-status="in-development">
+                    <div class="status-badge in-development">🚧 In Development</div>
+                    <span class="api-icon">⚡</span>
+                    <div class="api-title">gRPC Metadata</div>
+                    <div class="api-type">gRPC Services</div>
+                    <div class="api-description">
+                        High-performance gRPC metadata for microservices architecture with streaming cost calculation and service mesh integration.
+                    </div>
+                    <div class="implementation-info">
+                        <div class="contributor">
+                            <div class="contributor-avatar">TR</div>
+                            <div>
+                                <div class="contributor-name">Tom Rodriguez</div>
+                                <div class="contributor-role">Microservices Lead</div>
+                            </div>
+                        </div>
+                        <ul class="features-list">
+                            <li>Binary metadata support</li>
+                            <li>Streaming cost calculation</li>
+                            <li>Service mesh compatibility</li>
+                            <li>Proto definition templates</li>
+                        </ul>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-secondary">View Beta</a>
+                            <a href="#" class="btn btn-secondary">Test Integration</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Webhook Card -->
+                <div class="api-card not-available" data-status="not-available">
+                    <div class="status-badge not-available">❌ Not Available</div>
+                    <span class="api-icon">📡</span>
+                    <div class="api-title">Webhook Tracking</div>
+                    <div class="api-type">Event-driven APIs</div>
+                    <div class="api-description">
+                        Event-driven cost attribution for webhooks and callbacks with payload-based pricing and delivery confirmation tracking.
+                    </div>
+                    <div class="implementation-info">
+                        <div class="contributor">
+                            <div class="contributor-avatar">?</div>
+                            <div>
+                                <div class="contributor-name">Community Contributor Needed</div>
+                                <div class="contributor-role">Event Systems Specialist</div>
+                            </div>
+                        </div>
+                        <ul class="features-list">
+                            <li>Payload size-based costing</li>
+                            <li>Delivery confirmation tracking</li>
+                            <li>Retry cost attribution</li>
+                            <li>Event source mapping</li>
+                        </ul>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-disabled">Not Available</a>
+                            <a href="#" class="btn btn-secondary">Volunteer to Build</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database API Card -->
+                <div class="api-card implemented" data-status="implemented">
+                    <div class="status-badge implemented">✅ Implemented</div>
+                    <span class="api-icon">🗄️</span>
+                    <div class="api-title">Database API Headers</div>
+                    <div class="api-type">Database APIs</div>
+                    <div class="api-description">
+                        Query-level cost tracking for database APIs with connection pooling awareness and transaction-based attribution.
+                    </div>
+                    <div class="implementation-info">
+                        <div class="contributor">
+                            <div class="contributor-avatar">DP</div>
+                            <div>
+                                <div class="contributor-name">David Park</div>
+                                <div class="contributor-role">Database Engineer</div>
+                            </div>
+                        </div>
+                        <ul class="features-list">
+                            <li>Query complexity analysis</li>
+                            <li>Connection pool tracking</li>
+                            <li>Transaction cost mapping</li>
+                            <li>Performance metrics integration</li>
+                        </ul>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-primary">Deploy Tracking</a>
+                            <a href="#" class="btn btn-secondary">View Schemas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Total API Types</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Implemented</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">In Development</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Need Contributors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Community Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterApis(status) {
+            // Update filter button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter API cards
+            const cards = document.querySelectorAll('.api-card');
+            cards.forEach(card => {
+                if (status === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const cardStatus = card.getAttribute('data-status');
+                    card.style.display = cardStatus === status ? 'block' : 'none';
+                }
+            });
+
+            // Update visible count
+            const visibleCards = document.querySelectorAll('.api-card[style="display: block;"], .api-card:not([style*="none"])');
+            console.log(`Showing ${visibleCards.length} API implementations`);
+        }
+
+        // Add some interactive behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for cards
+            document.querySelectorAll('.api-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.closest('.btn')) {
+                        // Card click behavior (could open modal, etc.)
+                        const title = this.querySelector('.api-title').textContent;
+                        console.log(`Clicked on ${title}`);
+                    }
+                });
+            });
+
+            // Add hover effects for implemented cards
+            document.querySelectorAll('.api-card.implemented').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# Cloud deployment configuration (for Elastic Beanstalk)
+server:
+  port: 5000
+
+spring:
+  # Disable Neo4j for cloud deployment
+  data:
+    neo4j:
+      uri: ""
+      username: ""
+      password: ""
+  
+  # Disable Kafka for cloud deployment  
+  kafka:
+    bootstrap-servers: ""
+    consumer:
+      enable-auto-commit: false
+    producer:
+      retries: 0
+
+# Disable all unnecessary features for initial deployment
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    org.springframework.data.neo4j: ERROR
+    org.springframework.kafka: ERROR
+    org.neo4j: ERROR
+    root: WARN
