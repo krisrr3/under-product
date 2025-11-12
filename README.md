@@ -41,6 +41,14 @@ Under-Product reads the API header logs and uses the Api Metadata, which could b
 - API usage by Product
 - API cost allocation per API
 
+# Maturity model
+
+You don't need every data point to get started, and here is the high level guidance
+
+![Under Product architecture](docs/maturity_model_v1.png)
+
+Starting just by collecting the minimum amount of data through the logs, with the api headers, and gradually make the TCO data more accurate to be able to answer the questions that often disrupt API strategies.
+
 
 # Build and deploy
 
@@ -48,6 +56,11 @@ The following commands can be used to build and deploy
 
         cd ./under-product-engine
         mvn package
+        eb init -p corretto up-dev --region ap-southeast-2
+        eb create up-dev
+
+After changes use the command below to deploy
+
         eb deploy
 
 
