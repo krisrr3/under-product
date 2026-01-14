@@ -1,15 +1,36 @@
 # Under Product
 
+<p align="center">
+  <img src="docs/up-logo2.png" alt="Logo" width="200"/>
+</p>
+
 ## Purpose
 
-Under Product is a capability that solves the transparency issue that exists between Product and APIs, and makes it clear to Product teams why amd how they are funding APIs, stacks and tools that the business depends on. 
+Under Product is a capability that solves the transparency issue that exists between Product and APIs, and makes it clear to Product teams why and how they are connected to APIs, stacks and tools that the business depends on. 
 
-The outcome is for API longevity to be improved.
+The outcome is for API longevity to be extended, and constant re-writes/waste of investments to be reduced.
 
 ## Relevance in AI era
 
 As more business teams will start prototyping/building apps without IT, there will still be a reliance on integration between common services within an organisation or outside.
 Keeping track of how all these apps and services are interacting with the end product is essential.
+
+## Relationship views
+
+For business teams funding technology initiatives, it can be hard to comprehend the costs and the rationale for changing an API 2 times removed from the actual product. These frustrations leads to tensions between teams and short term decisions that sounds right, but cause further technical debt and pain down the line.
+
+If an Architect, or the Tech savvy Business Product Owner, had the ability to pull up a view explaining how his Product maps to capabilities/APIs that are essential for the health and success of the Product, then there is a chance for better understanding.
+
+<p align="center">
+  <img src="docs/relationship_graph_1.png" alt="Logo" />
+</p>
+
+
+The problem remains the same as more AI capabilities (and dependencies) are added to the estate, there will always be need to connect the dots. 
+
+<p align="center">
+  <img src="docs/relationship_graph_3.png" alt="Logo" />
+</p>
 
 ### How does the current app exist
 
@@ -20,6 +41,8 @@ Keeping track of how all these apps and services are interacting with the end pr
 # Domain
 
 Using DDD to spell out the Ubiquitous Language,
+
+> A Product is something of value exchanged from a business to customers
 
 > A Channel is used to distribute a Product to Customers. The channel relies on APIs for various functionalities to be processed for the Customer. Some of the APIs also rely on other APIs to enable certain functionalities to be fulfilled.
 
@@ -47,9 +70,7 @@ This can be rolled out through a script to GitHub repos where applications and A
     "CalledLayer": "Payments API"
 }
 ```
-### Traffic Simulator
 
-The Traffic Simulator page shows an example how the data would be visualised. The design frame shows the how the Product was meant to interact with other services, and on the right you have the actual view that is extracted from logs when they are available.
 
 ## Data Sources
 
@@ -65,29 +86,6 @@ You don't need every data point to get started, and here is the high level guida
 
 Starting just by collecting the minimum amount of data through the logs, with the api headers, and gradually make the TCO data more accurate to be able to answer the questions that often disrupt API strategies.
 
-
-# Build and deploy
-
-# In IDE
-
-Simply run the main Spring class UnderProductEngineApplication as a Java App.
-
-# Local
-
-        cd ./under-product-engine
-        mvn clean install
-
-# On AWS Elastic Beanstalk
-The following commands can be used to build and deploy
-
-        cd ./under-product-engine
-        mvn package
-        eb init -p corretto up-dev --region ap-southeast-2
-        eb create up-dev
-
-After changes use the command below to deploy
-
-        eb deploy
 
 
 
