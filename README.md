@@ -26,7 +26,7 @@ If an Architect, or the Tech savvy Business Product Owner, had the ability to pu
 </p>
 
 
-The problem remains the same as more AI capabilities (and dependencies) are added to the estate, there will always be need to connect the dots. 
+The problem remains the same as more AI capabilities (and dependencies) are added to the estate, there will always be a need to connect the dots. 
 
 <p align="center">
   <img src="docs/relationship_graph_3.png" alt="Logo" />
@@ -35,8 +35,9 @@ The problem remains the same as more AI capabilities (and dependencies) are adde
 ### How does the current app exist
 
 1. Standalone App
-2. As a plugin to an API Portal (Not yet built)
-3. As a plugin to a Gateway (Not yet built)
+2. Extension to an existing observability tool (which one?)
+3. As a plugin to an API Portal (Not yet built)
+4. As a plugin to a Gateway (Not yet built)
 
 # Domain
 
@@ -74,7 +75,7 @@ This can be rolled out through a script to GitHub repos where applications and A
 
 ## Data Sources
 
-Under-Product reads the API header logs and uses the Api Metadata, which could be stored in an API Catalogue or an architecture repository, to contruct a summary of 
+Under-Product reads the design json files, API header logs and uses the Api Metadata, which could be stored in an API Catalogue or an architecture repository, to contruct a summary of 
 - API usage by Product
 - API cost allocation per API
 
