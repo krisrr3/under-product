@@ -10,6 +10,13 @@ Under Product is a capability that solves the transparency issue that exists bet
 
 The outcome is for API longevity to be extended, and constant re-writes/waste of investments to be reduced.
 
+## Users
+
+The people that would find the most use for this capability are Architects and Product Owners. The times that this will be most useful are:
+- during planning exercises, to answer why should we pay for this API to change and what fraction of the tab do we pick
+- post major transformations, when boundaries are shifting and ownership is unclear
+- during cost control exercises or when Products are no longer that profitable, to know how other Product teams using the API can pick up the tab. Or worst case, to choose which capability needs to be modified or switched off
+
 ## Relevance in AI era
 
 As more business teams will start prototyping/building apps without IT, there will still be a reliance on integration between common services within an organisation or outside.
